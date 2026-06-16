@@ -1,0 +1,379 @@
+{
+  "datasets": [
+    {
+      "name": "4be7d7b2",
+      "displayName": "Taxi Trip Insights by Hour Analysis",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT \n",
+        "    pickup_hour,\n",
+        "    SUM(total_trips) AS total_trips,\n",
+        "    ROUND(AVG(avg_fare_usd), 2) AS avg_fare,\n",
+        "    ROUND(AVG(avg_duration_mins), 2) AS avg_duration\n",
+        "FROM nyc_taxi_project.gold_data.gold_hourly_trips\n",
+        "GROUP BY pickup_hour\n",
+        "ORDER BY pickup_hour"
+      ]
+    },
+    {
+      "name": "a1668c69",
+      "displayName": "Payment Method Summary for Taxi Trips and Revenue",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT \n",
+        "    payment_label,\n",
+        "    SUM(total_trips) AS total_trips,\n",
+        "    SUM(total_fare_usd) AS total_revenue,\n",
+        "    SUM(total_tips_usd) AS total_tips\n",
+        "FROM nyc_taxi_project.gold_data.gold_payment_summary\n",
+        "GROUP BY payment_label\n",
+        "ORDER BY total_trips DESC"
+      ]
+    },
+    {
+      "name": "df868ab5",
+      "displayName": "Revenue and Trips Summary by Payment Method",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT \n",
+        "    payment_label,\n",
+        "    SUM(total_trips) AS total_trips,\n",
+        "    SUM(total_fare_usd) AS total_revenue,\n",
+        "    SUM(total_tips_usd) AS total_tips\n",
+        "FROM nyc_taxi_project.gold_data.gold_payment_summary\n",
+        "GROUP BY payment_label\n",
+        "ORDER BY total_trips DESC"
+      ]
+    },
+    {
+      "name": "9483ec3b",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT \n",
+        "    payment_label,\n",
+        "    SUM(total_trips) AS total_trips,\n",
+        "    SUM(total_fare_usd) AS total_revenue,\n",
+        "    SUM(total_tips_usd) AS total_tips\n",
+        "FROM nyc_taxi_project.gold_data.gold_payment_summary\n",
+        "GROUP BY payment_label\n",
+        "ORDER BY total_trips DESC"
+      ]
+    },
+    {
+      "name": "588ead72",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    distance_bucket,\n",
+        "    SUM(total_trips) AS total_trips,\n",
+        "    ROUND(AVG(avg_fare_usd), 2) AS avg_fare,\n",
+        "    ROUND(AVG(avg_duration_mins), 2) AS avg_duration\n",
+        "FROM nyc_taxi_project.gold_data.gold_trip_distance_buckets\n",
+        "GROUP BY distance_bucket\n",
+        "ORDER BY total_trips DESC"
+      ]
+    },
+    {
+      "name": "ca6be10b",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    distance_bucket,\n",
+        "    SUM(total_trips) AS total_trips,\n",
+        "    ROUND(AVG(avg_fare_usd), 2) AS avg_fare,\n",
+        "    ROUND(AVG(avg_duration_mins), 2) AS avg_duration\n",
+        "FROM nyc_taxi_project.gold_data.gold_trip_distance_buckets\n",
+        "GROUP BY distance_bucket\n",
+        "ORDER BY total_trips DESC"
+      ]
+    },
+    {
+      "name": "fe3db68b",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `workspace`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    pickup_year,\n",
+        "    pickup_month,\n",
+        "    SUM(total_trips) AS total_trips,\n",
+        "    SUM(total_revenue_usd) AS total_revenue\n",
+        "FROM nyc_taxi_project.gold_data.gold_hourly_trips\n",
+        "GROUP BY pickup_year, pickup_month\n",
+        "ORDER BY pickup_year, pickup_month"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "86678eaf",
+      "displayName": "NYC taxi",
+      "layout": [
+        {
+          "widget": {
+            "name": "aff3fede",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "4be7d7b2",
+                  "fields": [
+                    {
+                      "name": "pickup_hour",
+                      "expression": "`pickup_hour`"
+                    },
+                    {
+                      "name": "sum(total_trips)",
+                      "expression": "SUM(`total_trips`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Hourly Trip Volume"
+              },
+              "mark": {
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "pickup_hour",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_trips)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "64d297b4",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "9483ec3b",
+                  "fields": [
+                    {
+                      "name": "sum(total_trips)",
+                      "expression": "SUM(`total_trips`)"
+                    },
+                    {
+                      "name": "payment_label",
+                      "expression": "`payment_label`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "mark": {
+                "layout": "stack"
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Payment Type Breakdown"
+              },
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "sum(total_trips)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "payment_label",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "c5aa2aaf",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ca6be10b",
+                  "fields": [
+                    {
+                      "name": "total_trips",
+                      "expression": "`total_trips`"
+                    },
+                    {
+                      "name": "distance_bucket",
+                      "expression": "`distance_bucket`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Distance Bucket Analysis"
+              },
+              "mark": {
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "distance_bucket",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "color": {
+                  "fieldName": "total_trips",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 5,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "6b7edde8",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "fe3db68b",
+                  "fields": [
+                    {
+                      "name": "pickup_month",
+                      "expression": "`pickup_month`"
+                    },
+                    {
+                      "name": "sum(total_revenue)",
+                      "expression": "SUM(`total_revenue`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": " Monthly Revenue Trend",
+                "showTitle": true
+              },
+              "mark": {
+                "layout": "layer"
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "pickup_month",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_revenue)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 6,
+            "width": 5,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "28bc0f00",
+      "displayName": "Untitled page",
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
