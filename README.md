@@ -174,7 +174,3 @@ os.environ["KAGGLE_KEY"] = "your_key"
 - Average fare across all trips is approximately $12–$14
 
 ---
-
-## Author
-
-**Ayesha** — Data Engineering Project on Databricks
