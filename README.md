@@ -70,15 +70,15 @@ Kaggle Dataset
 ```
 nyc-taxi-databricks-lakehouse/
 │
-├── 01_bronze_ingestion.ipynb     # Kaggle download, extract, raw Delta table
-├── 02_silver_layer.ipynb         # Cleaning, casting, filtering, feature engineering
-├── 03_gold_layer.ipynb           # Aggregated Gold tables
-├── 04_quality_checks.ipynb       # Data quality validation report
+├── 01_bronze_ingestion.ipynb     
+├── 02_silver_layer.ipynb         
+├── 03_gold_layer.ipynb          
+├── 04_quality_checks.ipynb       
 │
-├── Hourly Trip Volume.sql        # Trips by hour of day
-├── Payment Type Breakdown.sql    # Credit card vs cash analysis
-├── Distance Bucket Analysis.sql  # Short/medium/long trip breakdown
-├── Monthly Revenue Trend.sql     # Revenue trend over time
+├── Hourly Trip Volume.sql        
+├── Payment Type Breakdown.sql    
+├── Distance Bucket Analysis.sql  
+├── Monthly Revenue Trend.sql     
 │
 └── README.md
 ```
